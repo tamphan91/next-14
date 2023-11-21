@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "./data-table-column-header";
-import { Ban, PauseCircle, PlayCircle } from "lucide-react";
+import { PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Person } from './make-data';
 

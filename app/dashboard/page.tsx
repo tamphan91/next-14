@@ -1,6 +1,5 @@
-import { DataTable, ReactTableVirtualized } from './data-table';
-import { columns } from './columns';
-import { makeData } from './make-data';
+import { makeData } from "./make-data";
+import Test0 from ".";
 
 // async function getData(): Promise<Payment[]> {
 //   // Fetch data from your API here.
@@ -82,12 +81,12 @@ import { makeData } from './make-data';
 // }
 
 export default async function Page() {
-  console.log('dashboard')
-  const data = await makeData(10);
+  console.log("dashboard");
+  const data = await makeData(200);
+
   return (
     <div className="p-2">
-      <DataTable columns={columns} data={data} />
-      {/* <ReactTableVirtualized /> */}
+      <Test0 data={data} />
     </div>
   );
 }

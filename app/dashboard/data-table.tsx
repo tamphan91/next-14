@@ -21,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useMemo, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
+import { useEffect, useRef, useState } from "react";
 import { Person, makeData } from "./make-data";
 import { columns } from "./columns";
+import { useBearStore } from '@/stores/useBearStore';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -65,10 +65,17 @@ export function DataTable<TData, TValue>({
     overscan: 20,
   });
 
+  const jobName = useBearStore((state) => state.filteredValue.jobName);
+  console.log('DataTable render');
+  useEffect(() => {
+    console.log('jobName', jobName);
+    table.getColumn("firstName")?.setFilterValue(jobName)
+  }, [jobName])
+
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
+        {/* <Input
           placeholder="Filter first name..."
           value={
             (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
@@ -77,7 +84,7 @@ export function DataTable<TData, TValue>({
             table.getColumn("firstName")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
       </div>
       <div className="rounded-md border">
         <Table>
