@@ -1,3 +1,4 @@
+'use server'
 import { faker } from '@faker-js/faker'
 
 export type Person = {
@@ -36,7 +37,7 @@ const newPerson = (index: number): Person => {
   }
 }
 
-export function makeData(...lens: number[]) {
+export async function makeData(...lens: number[]) {
   const makeDataLevel = (depth = 0): Person[] => {
     const len = lens[depth]!
     return range(len).map((d): Person => {
@@ -45,6 +46,6 @@ export function makeData(...lens: number[]) {
       }
     })
   }
-
+  await new Promise(r => setTimeout(r, 2000));
   return makeDataLevel()
 }

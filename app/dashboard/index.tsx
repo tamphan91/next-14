@@ -1,23 +1,24 @@
 "use client";
-import React, { memo, useEffect } from "react";
-import Test0 from "./Test0";
-import Test1 from "./Test1";
-import { useBearStore } from "@/stores/useBearStore";
-import Test2 from "./Test2";
+import JobTable from "./JobTable";
+import JobInfo from "./JobInfo";
+import { myAction } from "../actions";
+import { useCallback, useState } from "react";
+import { useFormState } from "react-dom";
 
-export default memo(function Main({ data }: { data: any[] }) {
-  console.log("Main render");
-  const setJobs = useBearStore((state) => state.setJobs);
-  const setFilteredJobs = useBearStore((state) => state.setFilteredJobs);
-  useEffect(() => {
-    setJobs(data);
-    setFilteredJobs(data);
-  }, []);
+const initialState = {
+  data: [],
+};
+
+export default function Schedule() {
+  const [date, setDate] = useState<Date>()
+  // const myActionWithData = useCallback(() => myAction.bind(null, date)(), [date]);
+  const [state, formAction] = useFormState(myAction, initialState);
   return (
-    <>
-      <Test0 />
-      <Test1 />
-      <Test2 data={data}/>
-    </>
+    <form action={formAction}>
+      <JobTable data={state?.data ?? []} />
+      <JobInfo date={date} setDate={setDate}/>
+      <br/>
+      <br/>
+    </form>
   );
-});
+}

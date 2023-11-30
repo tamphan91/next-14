@@ -18,7 +18,7 @@ import { Person } from './make-data';
 
 export const columns: ColumnDef<Person>[] = [
   {
-    size: 40,
+    size: 200,
     id: "select",
     header: ({ table }) => (
       <Checkbox
@@ -47,36 +47,36 @@ export const columns: ColumnDef<Person>[] = [
       <DataTableColumnHeader column={column} title="firstName"/>
     ),
   },
-  {
-    accessorKey: "lastName",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="lastName" />
-    ),
-  },
-  {
-    accessorKey: "age",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="age" />
-    ),
-  },
-  {
-    accessorKey: "visits",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="visits" />
-    ),
-  },
-  {
-    accessorKey: "progress",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="progress" />
-    ),
-  },
-  {
-    accessorKey: "status",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="status" />
-    ),
-  },
+  // {
+  //   accessorKey: "lastName",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="lastName" />
+  //   ),
+  // },
+  // {
+  //   accessorKey: "age",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="age" />
+  //   ),
+  // },
+  // {
+  //   accessorKey: "visits",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="visits" />
+  //   ),
+  // },
+  // {
+  //   accessorKey: "progress",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="progress" />
+  //   ),
+  // },
+  // {
+  //   accessorKey: "status",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="status" />
+  //   ),
+  // },
   {
     id: "actions",
     cell: ({ row }) => {

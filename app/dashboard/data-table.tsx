@@ -26,6 +26,8 @@ import { Person, makeData } from "./make-data";
 import { columns } from "./columns";
 import { useBearStore } from '@/stores/useBearStore';
 
+
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -65,26 +67,16 @@ export function DataTable<TData, TValue>({
     overscan: 20,
   });
 
-  const jobName = useBearStore((state) => state.filteredValue.jobName);
-  console.log('DataTable render');
-  useEffect(() => {
-    console.log('jobName', jobName);
-    table.getColumn("firstName")?.setFilterValue(jobName)
-  }, [jobName])
+  // const jobName = useBearStore((state) => state.filteredValue.jobName);
+  // console.log('DataTable render');
+  // useEffect(() => {
+  //   console.log('jobName', jobName);
+  //   table.getColumn("firstName")?.setFilterValue(jobName)
+  // }, [jobName])
 
   return (
     <div>
       <div className="flex items-center py-4">
-        {/* <Input
-          placeholder="Filter first name..."
-          value={
-            (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("firstName")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        /> */}
       </div>
       <div className="rounded-md border">
         <Table>
@@ -93,13 +85,13 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id} className="hover:bg-black">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-white">
+                    <TableHead key={header.id} className="text-white" style={{ width: header.getSize() }}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
-                          )}
+                          )} dsadsads
                     </TableHead>
                   );
                 })}
@@ -116,24 +108,6 @@ export function DataTable<TData, TValue>({
         >
           <div style={{ height: `${virtualizer.getTotalSize()}px` }}>
             <Table>
-              {/* <TableHeader className="bg-black sticky top-0 z-50 m-0">
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id} className="hover:bg-black">
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <TableHead key={header.id} className="text-white" style={{width: `${header.getSize()}`}}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </TableHead>
-                      );
-                    })}
-                  </TableRow>
-                ))}
-              </TableHeader> */}
               <TableBody>
                 {virtualizer.getVirtualItems().length ? (
                   virtualizer.getVirtualItems().map((virtualRow, index) => {
@@ -175,55 +149,6 @@ export function DataTable<TData, TValue>({
             </Table>
           </div>
         </div>
-
-        {/* <Table>
-          <TableHeader className="bg-black">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-black">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} className="text-white" style={{width: `${header.getSize()}px`}}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody className="h-0">
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} style={{width: `${cell.column.getSize()}px`}}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table> */}
       </div>
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
@@ -232,6 +157,7 @@ export function DataTable<TData, TValue>({
     </div>
   );
 }
+
 
 export function ReactTableVirtualized() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -281,8 +207,8 @@ export function ReactTableVirtualized() {
   //   []
   // );
 
-  const [data, setData] = useState(() => makeData(100));
-
+  // const [data, setData] = useState(() => makeData(100));
+  const [data, setData] = useState([]);
   const table = useReactTable({
     data,
     columns,
@@ -360,7 +286,7 @@ export function ReactTableVirtualized() {
                 >
                   {row.getVisibleCells().map((cell) => {
                     return (
-                      <td key={cell.id}>
+                      <td key={cell.id} >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
